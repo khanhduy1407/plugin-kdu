@@ -1,0 +1,44 @@
+{
+  "name": "@nkduy/plugin-kdu",
+  "version": "1.1.0",
+  "license": "MIT",
+  "author": "NKDuy",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "tsc -p . -w --incremental",
+    "build": "rimraf dist && run-s build-bundle build-types",
+    "build-bundle": "esbuild src/index.ts --bundle --platform=node --target=node12 --external:@nkduy/compiler-sfc --outfile=dist/index.js",
+    "build-types": "tsc -p . --emitDeclarationOnly --outDir temp && api-extractor run && rimraf temp",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s --commit-path . --lerna-package plugin-kdu",
+    "release": "node ../../scripts/release.js"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khanhduy1407/plugin-kdu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/khanhduy1407/plugin-kdu/issues"
+  },
+  "homepage": "https://github.com/khanhduy1407/plugin-kdu",
+  "peerDependencies": {
+    "@nkduy/compiler-sfc": "^3.0.4"
+  },
+  "devDependencies": {
+    "@rollup/pluginutils": "^4.1.0",
+    "@types/hash-sum": "^1.0.0",
+    "@nkduy/compiler-sfc": "^3.0.4",
+    "debug": "^4.3.1",
+    "hash-sum": "^2.0.0",
+    "rollup": "^2.35.1",
+    "slash": "^3.0.0",
+    "source-map": "^0.6.1",
+    "vite": "^2.0.0-beta.31"
+  }
+}
